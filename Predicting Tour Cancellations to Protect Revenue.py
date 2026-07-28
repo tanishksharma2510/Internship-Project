@@ -129,7 +129,7 @@ best_model={
 }
 scores=[]
 for mname,mp in best_model.items():
-    clf=RandomizedSearchCV(estimator=mp['model'],param_distributions=mp['params'],n_iter=10,cv=5,scoring='f1_score',n_jobs=-1,
+    clf=RandomizedSearchCV(estimator=mp['model'],param_distributions=mp['params'],n_iter=10,cv=5,scoring='f1_macro',n_jobs=-1,
     random_state=42)
     clf.fit(x_train,y_train)
     scores.append({
@@ -158,15 +158,15 @@ pipeline=Pipeline([
 ])
 pipeline.fit(X_train,Y_train)
 Y_pred=pipeline.predict(X_test)
-# Calculating Permutation Importance which tells us the importance of each feature in the model by showing the drop of a 
-# particular model's accuracy when a specific feature is randomly shuffled.
-result=permutation_importance(pipeline,X_test,Y_test,n_repeats=10,random_state=42,n_jobs=-1)
-feature_importances=pd.DataFrame({
-    'Feature':X.columns,
-    'Importance_Mean':result.importances_mean,
-    'Importance_Std':result.importances_std
-}).sort_values(by='Importance_Mean',ascending=False)
-print(feature_importances)
+# # Calculating Permutation Importance which tells us the importance of each feature in the model by showing the drop of a 
+# # particular model's accuracy when a specific feature is randomly shuffled.
+# result=permutation_importance(pipeline,X_test,Y_test,n_repeats=10,random_state=42,n_jobs=-1)
+# feature_importances=pd.DataFrame({
+#     'Feature':X.columns,
+#     'Importance_Mean':result.importances_mean,
+#     'Importance_Std':result.importances_std
+# }).sort_values(by='Importance_Mean',ascending=False)
+# print(feature_importances)
 
 # Deployment:
 app=dash.Dash(__name__,suppress_callback_exceptions=True)
@@ -380,7 +380,7 @@ def get_tab(tab_val):
                     html.P("This model was chosen because it: -"),
                     html.Div(children=[
                         html.Ul(children=[
-                            html.Li("Provides high prediction accuracy on structured tabular data."),
+                            html.Li("Provides high prediction F1 Score on structured tabular data."),
                             html.Li("Trains faster by grouping continuous values into histograms."),
                             html.Li("Handles large datasets efficiently with lower memory usage."),
                             html.Li("Captures complex non-linear relationships between booking features."),
@@ -455,7 +455,11 @@ def get_tab(tab_val):
                     html.Div(children=[dcc.Graph(figure=conmat,config={'responsive':True},style={'width':'100%','height':'300px'})],
                         style={'width':'60%'})
                 ],style={'display':'flex','flexDirection':'row','alignItems':'center','justifyContent':'space-between','marginTop':'40px'}),
-                html.P("The confusion matrix provides a visual summary of correctly and incorrectly classified bookings, while the performance metrics offer a comprehensive assessment of the model's predictive capability. The obtained results demonstrate that the Histogram-Based Gradient Boosting Classifier achieves high accuracy and balanced performance, making it a reliable choice for predicting tour cancellations and supporting data-driven revenue protection strategies.")
+                html.P(["The performance of the model is evaluated using standard classification metrics, i.e., ",html.Em("Accuracy"),", ",html.Em("Precision"),", ",html.Em("Recall"),", and ",html.Em("F1 Score"),", and the ",html.Em("Confusion Matrix"),r". The model achieves an Accuracy of 82.27%, correctly predicting most booking outcomes. A Precision of 81.97% indicates that the majority of bookings predicted as cancelled were actually cancelled, while a Recall of 79.29% reflects the model's ability to identify a large proportion of actual cancellations. The F1-Score of 80.24% demonstrates a balanced performance between precision and recall."]),
+                html.Br(),
+                html.P("The confusion matrix visually summarizes the model's predictions by showing the number of correctly and incorrectly classified bookings. Around 30,000 bookings were correctly predicted as cancelled and not cancelled showing a strong sign of how our model generalizes to an unseen dataset."),
+                html.Br(),
+                html.P("Overall, these results suggest that the model demonstrates strong predictive performance and serves as an effective decision-support tool for identifying potential booking cancellations. By enabling early risk detection, it helps the hospitality industry to implement proactive strategies to minimize revenue loss and optimize booking management."),
             ],style={'font-size':15,'color':'black','font-family':'Arial'}),
             html.Hr(style={'backgroundColor':'black','height':1}),
             html.Div(children=[
@@ -472,7 +476,7 @@ def get_tab(tab_val):
             html.Hr(style={'backgroundColor':'black','height':3}),
             html.Div(children=[
                 html.H2("About the Developer",style={'font-size':30,'color':'black','font-family':'Times New Roman'}),
-                html.P(["I am Tanishk Sharma, a B.Tech student specializing in ",html.Strong("Data Science",style={'font-weight':900})," with a strong interest in Machine Learning, Data Analytics, and Business Intelligence. My journey in data science began by completing the ",html.Strong("IBM Data Science Professional Certificate",style={'font-weight':900})," on ",html.Strong("Coursera",style={'font-weight':900}),", where I built a solid foundation in Python, data analysis, visualization, and machine learning."]),
+                html.P(["I am Tanishk Sharma, a B.Tech student from Amity University, Noida, specializing in ",html.Strong("Data Science",style={'font-weight':900})," with a strong interest in Machine Learning, Data Analytics, and Business Intelligence. My journey in data science began by completing the ",html.Strong("IBM Data Science Professional Certificate",style={'font-weight':900})," on ",html.Strong("Coursera",style={'font-weight':900}),", where I built a solid foundation in Python, data analysis, visualization, and machine learning."]),
                 html.P(["To gain practical industry experience, I completed a ",html.Strong("Data Scientist Internship")," at ",html.Strong("TUMLARE SOFTWARE SERVICES (P) LTD.",style={'font-weight':900})," where I worked on data science tasks involving data preprocessing, exploratory data analysis, machine learning, and predictive analytics. This internship strengthened my technical skills and provided valuable exposure to real-world data-driven projects."]),
                 html.P(["The knowledge and experience gained through my coursework and internship inspired me to develop this application, ",html.Strong("Predicting Tour Cancellations to Protect Revenue",style={'font-weight':900}),", which combines machine learning and interactive data visualization to support intelligent decision-making in the tourism and hospitality industry."])
             ],style={'font-size':20,'color':'black','font-family':'Arial'}),
@@ -592,8 +596,9 @@ def get_graphs(city,hotel,customer=None,deposit=None):
         pie_fig=px.pie(pie,values='Total Cancellations',names='Booking Source',title='Booking Sources Contribution in Total Cancellations')
         # SunBurst Chart:
         sun_fig=px.sunburst(sun,path=['Country','Total Adults','Total Children'],values='Total Cancellations',
-        title='Role of Country Behaviour in Total Cancellations',
-        labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Country':'Country of Origin'})
+        custom_data=['Country','Total Adults','Total Children'],title='Role of Country Behaviour in Total Cancellations',
+        hover_data=['Country','Total Adults','Total Children'],
+        labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Total Cancellations':'No. of Cancellations'})
         return line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig
 
 # About the Model:
