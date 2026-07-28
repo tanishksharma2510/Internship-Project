@@ -10,7 +10,7 @@ This project is useful in various ways for the hospitality industry. Some of the
 
 # How users can get started with the project ?
 1) Clone this repository.
-2) Install the required Python libraries, i.e., pandas, numpy, plotly (both express and graph_objs), sklearn, pycountry, and xgboost.
+2) Install the required Python libraries as listed in requirements.txt file.
 3) Download dataset from Kaggle, named as "Hotel Booking Reservation".
 4) Run the main Dash application file (e.g., app.py).
 5) Open the local server URL in your web browser to access the application.
