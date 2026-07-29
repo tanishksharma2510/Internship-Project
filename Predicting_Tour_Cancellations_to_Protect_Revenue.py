@@ -171,6 +171,7 @@ Y_pred=pipeline.predict(X_test)
 
 # Deployment:
 app=dash.Dash(__name__,suppress_callback_exceptions=True)
+server=app.server
 app.layout=html.Div(children=[
     html.H1("Tour Cancellations Prediction App",style={'textAlign':'center','color':'black','font-size':40,
     'font-family':'Times New Roman'}),
