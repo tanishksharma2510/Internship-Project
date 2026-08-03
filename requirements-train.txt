@@ -1,7 +1,5 @@
-dash==4.1.0
-plotly==6.7.0
 pandas==3.0.3
 numpy==2.4.5
+pycountry==26.2.16
 scikit-learn==1.9.0
 xgboost==3.3.0
-gunicorn
