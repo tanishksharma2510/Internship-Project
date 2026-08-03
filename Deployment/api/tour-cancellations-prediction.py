@@ -460,3 +460,17 @@ def get_graphs(city,hotel,customer=None,deposit=None):
         hover_data=['Country','Total Adults','Total Children'],
         labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Total Cancellations':'No. of Cancellations'})
         return line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig
+<<<<<<< HEAD:Deployment/api/tour-cancellations-prediction.py
+=======
+
+# About the Model:
+comp_fig=px.bar(score_df,x='Best Scores',y='Model',color_discrete_sequence=['coral'],
+title="Model's F1 Score Comparison",labels={'Model':'Machine Learning Models','Best Scores':'F1 Score (in %)'},orientation='h')
+cm=confusion_matrix(Y_test,Y_pred)
+conmat=px.imshow(cm,x=['Cancelled','Not Cancelled'],y=['Cancelled','Not Cancelled'],color_continuous_scale='Reds',text_auto=True,
+labels=dict(x='Predicted Cancellations',y='Actual Cancellations',color='Count'),title='HistGBC Model Performance')
+
+
+if __name__=='__main__':
+    app.run(host="0.0.0.0",debug=True,use_reloader=False)
+>>>>>>> 960898120bb8427264c25c7040cac86a3c8505ac:Predicting Tour Cancellations to Protect Revenue.py
