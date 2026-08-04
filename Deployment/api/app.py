@@ -29,7 +29,7 @@ conmat = px.imshow(cm, x=['Cancelled', 'Not Cancelled'], y=['Cancelled', 'Not Ca
 
 # Deployment:
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
-server = app.server
+handler = app.server
 app.layout=html.Div(children=[
     html.H1("Tour Cancellations Prediction App",style={'textAlign':'center','color':'black','font-size':40,
     'font-family':'Times New Roman'}),
