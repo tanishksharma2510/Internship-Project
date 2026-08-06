@@ -17,15 +17,6 @@ cats_col = artifacts["cats_col"]
 Y_test = artifacts["Y_test"]
 Y_pred = artifacts["Y_pred"]
 
-comp_fig = px.bar(score_df, x='Best Scores', y='Model', color_discrete_sequence=['coral'],
-                   title="Model's F1 Score Comparison",
-                   labels={'Model': 'Machine Learning Models', 'Best Scores': 'F1 Score (in %)'},
-                   orientation='h')
-conmat = px.imshow(cm, x=['Cancelled', 'Not Cancelled'], y=['Cancelled', 'Not Cancelled'],
-                    color_continuous_scale='Reds', text_auto=True,
-                    labels=dict(x='Predicted Cancellations', y='Actual Cancellations', color='Count'),
-                    title='HistGBC Model Performance')
-
 # Deployment:
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 app.layout=html.Div(children=[
