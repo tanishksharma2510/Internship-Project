@@ -33,7 +33,6 @@ app.layout=html.Div(children=[
         type="circle",
         color="red",
         target_components={"tabs-output": "children"},
-        fullscreen=True,
         children=[html.Div(id="tabs-output")],
     ),
 ])
