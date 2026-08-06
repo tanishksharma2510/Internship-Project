@@ -2,7 +2,7 @@ import pickle
 import pandas as pd
 import numpy as np
 import plotly.express as px
-from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score
+from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score,confusion_matrix
 import dash
 from dash import dcc, html
 from dash.dependencies import Input, Output, State
@@ -16,7 +16,6 @@ X_columns = artifacts["X_columns"]
 cats_col = artifacts["cats_col"]
 Y_test = artifacts["Y_test"]
 Y_pred = artifacts["Y_pred"]
-cm = artifacts["cm"]
 
 comp_fig = px.bar(score_df, x='Best Scores', y='Model', color_discrete_sequence=['coral'],
                    title="Model's F1 Score Comparison",
