@@ -168,8 +168,7 @@ artifacts = {
     "X_columns": list(X.columns),
     "cats_col": cats_col,
     "Y_test": Y_test,
-    "Y_pred": Y_pred,
-    "cm": cm,
+    "Y_pred": Y_pred
 }
 
 with open("artifacts.pkl", "wb") as f:
