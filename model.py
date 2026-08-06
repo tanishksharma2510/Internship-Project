@@ -8,7 +8,6 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
-from sklearn.metrics import confusion_matrix
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.experimental import enable_iterative_imputer  # noqa: F401
@@ -161,7 +160,6 @@ Y_pred=pipeline.predict(X_test)
 #     'Importance_Std':result.importances_std
 # }).sort_values(by='Importance_Mean',ascending=False)
 # print(feature_importances)
-cm = confusion_matrix(Y_test, Y_pred)
 
 artifacts = {
     "pipeline": pipeline,
