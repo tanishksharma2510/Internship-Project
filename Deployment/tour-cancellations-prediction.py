@@ -2,6 +2,7 @@ import pickle
 import pandas as pd
 import numpy as np
 import plotly.express as px
+import plotly.graph_objects as go
 from sklearn.metrics import accuracy_score, recall_score, precision_score, f1_score,confusion_matrix
 import dash
 from dash import dcc, html
@@ -27,7 +28,13 @@ app.layout=html.Div(children=[
         dcc.Tab(label='Prediction',value='tab-2'),
         dcc.Tab(label='Dashboard',value='tab-3'),
     ]),
-    html.Div(id='tabs-output')
+    dcc.Loading(
+        id="loading-app",
+        type="circle",
+        color="red",
+        target_components={"tabs-output": "children"},
+        children=[html.Div(id="tabs-output")],
+    ),
 ])
 
 # Tabs:
