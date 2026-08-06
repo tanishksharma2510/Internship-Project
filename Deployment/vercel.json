@@ -1,14 +1,14 @@
 {
   "builds": [
     {
-      "src": "api/tour-cancellations-prediction.py",
+      "src": "tour-cancellations-prediction.py",
       "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "api/tour-cancellations-prediction.py"
+      "dest": "tour-cancellations-prediction.py"
     }
   ]
 }
