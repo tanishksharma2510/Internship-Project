@@ -350,8 +350,6 @@ def compute_info2(deposit2,country,booking,lead_time,cancellations):
     input_dict["Booking Source"]=booking
     input_dict["Lead Time (in days)"]=lead_time
     input_dict["Total Past Cancellations"]=cancellations
-    if (cancellations>0):
-        input_dict["Total Past Cancellations"]=1
     df2=pd.DataFrame([input_dict])[X_columns]
     df2[cats_col]=df2[cats_col].astype(str)
     return df2
@@ -375,8 +373,8 @@ def get_pred(deposit2,country,booking,lead_time,cancellations,button=None):
         html.P("*Past cancellations detail must be more than 0",style={'font-size':10,'color':'red'})),""
     elif (lead_time<0 or lead_time>365):
         return html.P("*Lead Time detail must be between 0 and 365",style={'font-size':10,'color':'red'}),""
-    elif (cancellations<0):
-        return html.P("*Past cancellations detail must be more than 0",style={'font-size':10,'color':'red'}),""
+    elif (cancellations<0 or cancellations>30):
+        return html.P("*Past cancellations detail must be between 0 and 30",style={'font-size':10,'color':'red'}),""
     else:
         data=compute_info2(deposit2,country,booking,lead_time,cancellations)
         pred=pipeline.predict(data)
