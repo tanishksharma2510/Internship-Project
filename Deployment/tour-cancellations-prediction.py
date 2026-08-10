@@ -19,6 +19,7 @@ Y_test = artifacts["Y_test"]
 Y_pred = artifacts["Y_pred"]
 
 # Deployment:
+# 1st Part: App Layout
 app = dash.Dash(__name__, suppress_callback_exceptions=True)
 app.layout=html.Div(children=[
     html.H1("Tour Cancellations Prediction App",style={'textAlign':'center','color':'black','font-size':40,
@@ -342,6 +343,7 @@ def get_tab(tab_val):
             html.Footer("© 2026 Tanishk Sharma. All rights reserved.",style={'textAlign':'center','fontSize':10,'color':'black','fontFamily':'Arial'})
         ])
 
+# 2nd Part: Callback Function
 # Prediction:
 def compute_info2(deposit2,country,booking,lead_time,cancellations):
     input_dict={col:np.nan for col in X_columns}
@@ -368,7 +370,7 @@ def get_pred(deposit2,country,booking,lead_time,cancellations,button=None):
         return "",""
     if (deposit2==None or country==None or booking==None or lead_time==None or cancellations==None):
         return html.P("*Please enter the required details",style={'font-size':10,'color':'red'}),""
-    elif (cancellations<0 and (lead_time<0 or lead_time>365)):
+    elif ((cancellations<0 or cancellations>30) and (lead_time<0 or lead_time>365)):
         return (html.P("*Lead Time detail must be between 0 and 365",style={'font-size':10,'color':'red'}),
         html.P("*Past cancellations detail must be more than 0",style={'font-size':10,'color':'red'})),""
     elif (lead_time<0 or lead_time>365):
@@ -462,6 +464,6 @@ cm=confusion_matrix(Y_test,Y_pred)
 conmat=px.imshow(cm,x=['Cancelled','Not Cancelled'],y=['Cancelled','Not Cancelled'],color_continuous_scale='Reds',text_auto=True,
 labels=dict(x='Predicted Cancellations',y='Actual Cancellations',color='Count'),title='HistGBC Model Performance')
 
-
+# 3rd Part: Running the App
 if __name__=='__main__':
     app.run(host="0.0.0.0",debug=True,use_reloader=False)
