@@ -25,7 +25,7 @@ app.layout=html.Div(children=[
     html.H1("Tour Cancellations Prediction App",style={'textAlign':'center','color':'black','font-size':40,
     'font-family':'Times New Roman'}),
     dcc.Tabs(id='tabs-input',value='tab-1',children=[
-        dcc.Tab(label='About the Model',value='tab-1'),
+        dcc.Tab(label='About the App',value='tab-1'),
         dcc.Tab(label='Prediction',value='tab-2'),
         dcc.Tab(label='Dashboard',value='tab-3'),
     ]),
@@ -38,7 +38,6 @@ app.layout=html.Div(children=[
     ),
 ])
 
-# Tabs:
 @app.callback(Output(component_id='tabs-output',component_property='children'),
 Input(component_id='tabs-input',component_property='value'))
 
@@ -204,7 +203,7 @@ def get_tab(tab_val):
             ],style={'display':'flex','flexDirection':'row','padding':'10px','maxWidth':'100%'})
         ])
         
-    # About the Model Tab:
+    # About the App Tab:
     else:
         return html.Div(children=[
             html.Div(children=[
@@ -457,7 +456,7 @@ def get_graphs(city,hotel,customer=None,deposit=None):
         labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Total Cancellations':'No. of Cancellations'})
         return line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig
 
-# About the Model:
+# About the App:
 comp_fig=px.bar(score_df,x='Best Scores',y='Model',color_discrete_sequence=['coral'],
 title="Model's F1 Score Comparison",labels={'Model':'Machine Learning Models','Best Scores':'F1 Score (in %)'},orientation='h')
 cm=confusion_matrix(Y_test,Y_pred)
