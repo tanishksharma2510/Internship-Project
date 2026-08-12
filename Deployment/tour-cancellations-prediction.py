@@ -371,7 +371,7 @@ def get_pred(deposit2,country,booking,lead_time,cancellations,button=None):
         return html.P("*Please enter the required details",style={'font-size':10,'color':'red'}),""
     elif ((cancellations<0 or cancellations>30) and (lead_time<0 or lead_time>365)):
         return (html.P("*Lead Time detail must be between 0 and 365",style={'font-size':10,'color':'red'}),
-        html.P("*Past cancellations detail must be more than 0",style={'font-size':10,'color':'red'})),""
+        html.P("*Past cancellations detail must be between 0 and 30",style={'font-size':10,'color':'red'})),""
     elif (lead_time<0 or lead_time>365):
         return html.P("*Lead Time detail must be between 0 and 365",style={'font-size':10,'color':'red'}),""
     elif (cancellations<0 or cancellations>30):
