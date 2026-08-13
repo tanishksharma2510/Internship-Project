@@ -170,36 +170,81 @@ def get_tab(tab_val):
                 ],style={'width':'20%','minWidth':'200px','padding':'15px','backgroundColor':'beige','borderRadius':'5px',
                 'marginRight':'20px'}),
                 html.Div(children=[
+                    html.Div(children=[
+                        dcc.Loading(
+                            id='loading-line-1',
+                            type='graph',
+                            children=dcc.Graph(id='line-plot-1'),
+                            style={'width':'48%'}
+                        ),
+                        dcc.Loading(
+                            id='loading-line-2',
+                            type='graph',
+                            children=dcc.Graph(id='line-plot-2'),
+                            style={'width':'48%'}
+                        ),
+                    ],style={'display':'flex','flexDirection':'row','justifyContent':'space-between'}),
                     dcc.Loading(
-                        id='loading-1',
-                        type='graph',
-                        children=dcc.Graph(id='line-plot'),
-                    ),
-                    dcc.Loading(
-                        id='loading-2',
+                        id='loading-area',
                         type='graph',
                         children=dcc.Graph(id='area-plot'),
                     ),
-                    dcc.Loading(
-                        id='loading-3',
-                        type='graph',
-                        children=dcc.Graph(id='bar-plot'),
-                    ),
-                    dcc.Loading(
-                        id='loading-4',
-                        type='graph',
-                        children=dcc.Graph(id='hist-plot'),
-                    ),
-                    dcc.Loading(
-                        id='loading-5',
-                        type='graph',
-                        children=dcc.Graph(id='pie-plot'),
-                    ),
-                    dcc.Loading(
-                        id='loading-6',
-                        type='graph',
-                        children=dcc.Graph(id='sun-plot'),
-                    )
+                    html.Div(children=[
+                        dcc.Loading(
+                            id='loading-bar-1',
+                            type='graph',
+                            children=dcc.Graph(id='bar-plot-1'),
+                            style={'width':'48%'}
+                        ),
+                        dcc.Loading(
+                            id='loading-bar-2',
+                            type='graph',
+                            children=dcc.Graph(id='bar-plot-2'),
+                            style={'width':'48%'}
+                        ),
+                    ],style={'display':'flex','flexDirection':'row','justifyContent':'space-between'}),
+                    html.Div(children=[
+                        dcc.Loading(
+                            id='loading-hist-1',
+                            type='graph',
+                            children=dcc.Graph(id='hist-plot-1'),
+                            style={'width':'48%'}
+                        ),
+                        dcc.Loading(
+                            id='loading-hist-2',
+                            type='graph',
+                            children=dcc.Graph(id='hist-plot-2'),
+                            style={'width':'48%'}
+                        ),
+                    ],style={'display':'flex','flexDirection':'row','justifyContent':'space-between'}),
+                    html.Div(children=[
+                        dcc.Loading(
+                            id='loading-pie-1',
+                            type='graph',
+                            children=dcc.Graph(id='pie-plot-1'),
+                            style={'width':'48%'}
+                        ),
+                        dcc.Loading(
+                            id='loading-pie-2',
+                            type='graph',
+                            children=dcc.Graph(id='pie-plot-2'),
+                            style={'width':'48%'}
+                        ),
+                    ],style={'display':'flex','flexDirection':'row','justifyContent':'space-between'}),
+                    html.Div(children=[
+                        dcc.Loading(
+                            id='loading-sun-1',
+                            type='graph',
+                            children=dcc.Graph(id='sun-plot-1'),
+                            style={'width':'48%'}
+                        ),
+                        dcc.Loading(
+                            id='loading-sun-2',
+                            type='graph',
+                            children=dcc.Graph(id='sun-plot-2'),
+                            style={'width':'48%'}
+                        ),
+                    ],style={'display':'flex','flexDirection':'row','justifyContent':'space-between'})
                 ],style={'display':'block','width':'80%'}),
             ],style={'display':'flex','flexDirection':'row','padding':'10px','maxWidth':'100%'})
         ])
@@ -401,61 +446,88 @@ def compute_info1(hotel_data,city,hotel,customer,deposit):
     df['Total Cancellations']=df['Cancellation Status']+df['Total Past Cancellations']
     df['Total Non-Cancellations']=df['Total Past Non-cancellations']+(1-df['Cancellation Status'])
     # Line Data:
-    line=df.groupby('No. of Weeks')['Total Non-Cancellations'].sum().reset_index()
+    line1=df.groupby('No. of Weeks')['Total Cancellations'].sum().reset_index()
+    line2=df.groupby('No. of Weeks')['Total Non-Cancellations'].sum().reset_index()
     # Area Data:
     area=df.groupby(['Total Nights Stays','Month'])['Average Daily Rate'].mean().reset_index().sort_values(by='Month',ascending=True)
     # Bar Data:
-    bar=df.groupby(['Room Category','Meal Plan'])['Total Cancellations'].sum().reset_index()
+    bar1=df.groupby(['Room Category','Meal Plan'])['Total Cancellations'].sum().reset_index()
+    bar2=df.groupby(['Room Category','Meal Plan'])['Total Non-Cancellations'].sum().reset_index()
     # Histogram Data:
-    hist=df[['Total Non-Cancellations','Lead Time (in days)']]
+    hist1=df[['Total Cancellations','Lead Time (in days)']]
+    hist2=df[['Total Non-Cancellations','Lead Time (in days)']]
     # Pie Data:
-    pie=df.groupby('Booking Source')['Total Cancellations'].sum().reset_index()
+    pie1=df.groupby('Booking Source')['Total Cancellations'].sum().reset_index()
+    pie2=df.groupby('Booking Source')['Total Non-Cancellations'].sum().reset_index()
     # Sunburst Data:
-    sunburst=df.groupby('Country')[['Total Adults','Total Children','Total Cancellations']].sum().reset_index()
-    return line,area,bar,hist,pie,sunburst
+    sunburst1=df.groupby('Country')[['Total Adults','Total Children','Total Cancellations']].sum().reset_index()
+    sunburst2=df.groupby('Country')[['Total Adults','Total Children','Total Non-Cancellations']].sum().reset_index()
+    return line1,line2,area,bar1,bar2,hist1,hist2,pie1,pie2,sunburst1,sunburst2
 
-@app.callback([Output(component_id='line-plot',component_property='figure'),
+@app.callback([Output(component_id='line-plot-1',component_property='figure'),
+Output(component_id='line-plot-2',component_property='figure'),
 Output(component_id='area-plot',component_property='figure'),
-Output(component_id='bar-plot',component_property='figure'),
-Output(component_id='hist-plot',component_property='figure'),
-Output(component_id='pie-plot',component_property='figure'),
-Output(component_id='sun-plot',component_property='figure'),],
+Output(component_id='bar-plot-1',component_property='figure'),
+Output(component_id='bar-plot-2',component_property='figure'),
+Output(component_id='hist-plot-1',component_property='figure'),
+Output(component_id='hist-plot-2',component_property='figure'),
+Output(component_id='pie-plot-1',component_property='figure'),
+Output(component_id='pie-plot-2',component_property='figure'),
+Output(component_id='sun-plot-1',component_property='figure'),
+Output(component_id='sun-plot-2',component_property='figure'),],
 [Input(component_id='dropdown-1',component_property='value'),
 Input(component_id='dropdown-2',component_property='value'),
 Input(component_id='checklist-1',component_property='value'),
 Input(component_id='checklist-2',component_property='value'),])
 
 def get_graphs(city,hotel,customer=None,deposit=None):
-    line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig={},{},{},{},{},{}
+    line_fig1,line_fig2,area_fig,bar_fig1,bar_fig2,hist_fig1,hist_fig2,pie_fig1,pie_fig2,sun_fig1,sun_fig2={},{},{},{},{},{},{},{},{},{},{}
     if (city==None or hotel==None):
-        return line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig
+        return line_fig1,line_fig2,area_fig,bar_fig1,bar_fig2,hist_fig1,hist_fig2,pie_fig1,pie_fig2,sun_fig1,sun_fig2
     else:
-        line,area,bar,hist,pie,sun=compute_info1(hotel_data,city,hotel,customer,deposit)        
+        line1,line2,area,bar1,bar2,hist1,hist2,pie1,pie2,sun1,sun2=compute_info1(hotel_data,city,hotel,customer,deposit)        
         # Line Graph:
-        line_fig=px.line(line,x='No. of Weeks',y='Total Non-Cancellations',
-        title='Trend of Total Non-Cancellations vs No. of Weeks spent by Customers',markers=True,color_discrete_sequence=['brown'])
+        line_fig1=px.line(line1,x='No. of Weeks',y='Total Cancellations',
+        title='Trend of Total Cancellations vs No. of Weeks spent by Customers',markers=True,color_discrete_sequence=['royalblue'])
+        line_fig2=px.line(line2,x='No. of Weeks',y='Total Non-Cancellations',
+        title='Trend of Total Non-Cancellations vs No. of Weeks spent by Customers',markers=True,color_discrete_sequence=['seagreen'])
         # Area Graph:
         area_fig=px.area(area,x='Total Nights Stays',y='Average Daily Rate',color='Month',
         title='Distribution of each Month in Nights Stay vs Average Daily Rate (ADR)',
         labels={'Total Nights Stays':'Total Nights Stays (in days)','Average Daily Rate (in Rs)':'Average Daily Rate'})
         # Bar Graph:
-        bar_fig=px.bar(bar,x='Room Category',y='Total Cancellations',color='Meal Plan',barmode='group',
-        color_discrete_sequence=['darkorange','yellow','navy','darkgreen'],
+        bar_fig1=px.bar(bar1,x='Room Category',y='Total Cancellations',color='Meal Plan',barmode='group',
+        color_discrete_sequence=['darkorange','yellow','crimson','hotpink'],
         title='Room-wise Comparison of Total Cancellations with Meal Plan',
         labels={'Room Category':'Type of Room Booked','Meal Plan':'Meal Plan Options'})
+        bar_fig2=px.bar(bar2,x='Room Category',y='Total Non-Cancellations',color='Meal Plan',barmode='group',
+        color_discrete_sequence=['darkorange','yellow','crimson','hotpink'],
+        title='Room-wise Comparison of Total Non-Cancellations with Meal Plan',
+        labels={'Room Category':'Type of Room Booked','Meal Plan':'Meal Plan Options'})
         # Histogram Plot:
-        hist_fig=px.histogram(hist,x='Lead Time (in days)',y='Total Non-Cancellations',nbins=10,color_discrete_sequence=['gold'],
+        hist_fig1=px.histogram(hist1,x='Lead Time (in days)',y='Total Cancellations',nbins=10,color_discrete_sequence=['cyan'],
+        title='Distribution of Total Cancellations based on Lead Time (in days)')
+        hist_fig1.update_traces(marker=dict(line=dict(color='black',width=1.5)))
+        hist_fig1.update_yaxes(title_text='Total Cancellations')
+        hist_fig2=px.histogram(hist2,x='Lead Time (in days)',y='Total Non-Cancellations',nbins=10,color_discrete_sequence=['gold'],
         title='Distribution of Total Non-Cancellations based on Lead Time (in days)')
-        hist_fig.update_traces(marker=dict(line=dict(color='black',width=1.5)))
-        hist_fig.update_yaxes(title_text='Total Non-Cancellations')
+        hist_fig2.update_traces(marker=dict(line=dict(color='black',width=1.5)))
+        hist_fig2.update_yaxes(title_text='Total Non-Cancellations')
         # Pie Chart:
-        pie_fig=px.pie(pie,values='Total Cancellations',names='Booking Source',title='Booking Sources Contribution in Total Cancellations')
+        pie_fig1=px.pie(pie1,values='Total Cancellations',names='Booking Source',
+        title='Booking Sources Contribution in Total Cancellations')
+        pie_fig2=px.pie(pie2,values='Total Non-Cancellations',names='Booking Source',
+        title='Booking Sources Contribution in Total Non-Cancellations')
         # SunBurst Chart:
-        sun_fig=px.sunburst(sun,path=['Country','Total Adults','Total Children'],values='Total Cancellations',
+        sun_fig1=px.sunburst(sun1,path=['Country','Total Adults','Total Children'],values='Total Cancellations',
         custom_data=['Country','Total Adults','Total Children'],title='Role of Country Behaviour in Total Cancellations',
         hover_data=['Country','Total Adults','Total Children'],
         labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Total Cancellations':'No. of Cancellations'})
-        return line_fig,area_fig,bar_fig,hist_fig,pie_fig,sun_fig
+        sun_fig2=px.sunburst(sun2,path=['Country','Total Adults','Total Children'],values='Total Non-Cancellations',
+        custom_data=['Country','Total Adults','Total Children'],title='Role of Country Behaviour in Total Non-Cancellations',
+        hover_data=['Country','Total Adults','Total Children'],
+        labels={'Total Adults':'No. of Adults','Total Children':'No. of Children','Total Non-Cancellations':'No. of Non-Cancellations'})
+        return line_fig1,line_fig2,area_fig,bar_fig1,bar_fig2,hist_fig1,hist_fig2,pie_fig1,pie_fig2,sun_fig1,sun_fig2
 
 # About the App:
 comp_fig=px.bar(score_df,x='Best Scores',y='Model',color_discrete_sequence=['coral'],
