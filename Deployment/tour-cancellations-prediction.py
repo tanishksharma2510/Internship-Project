@@ -255,38 +255,60 @@ def get_tab(tab_val):
             html.Div(children=[
                 html.H3("Overview",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
                 html.Div(children=[
-                    html.P("Tour Cancellations Prediction App is a machine learning-based web application designed to predict whether a hotel booking is likely to be cancelled. The system analyzes user-provided booking information and generates a prediction along with the confidence level of the result. It also provides an interactive dashboard for exploring booking trends and customer behavior using historical hotel booking data."),
-                    html.P(["Some key features of this app include: -",html.Ul(children=[
-                        html.Li("Predicts booking cancellation."),
-                        html.Li("Displays prediction confidence."),
-                        html.Li("Provides interactive dashboard for data insights."),
-                        html.Li("Has user-friendly (easy to use) interface.")
+                    html.P("Tour Cancellations Prediction App is a machine learning-based web application designed to predict whether a hotel booking is likely to be cancelled or not. This application is developed primarily for hospitality industry, mainly hotels, resorts, and individual travel agents or travel agencies. The system gives prediction and confidence level (probability in %) of the result based on user-provided booking information. It also provides interactive dashboard to scrutinize booking trends and customer behaviour through visualizations."),
+                    html.P(["Some key features of this application are as follows: -",html.Ul(children=[
+                        html.Li("Predicts booking cancellation for identifying high-risk bookings."),
+                        html.Li("Provides interactive dashboard for gaining powerful insights."),
+                        html.Li("It has a user-friendly (easy to use) interface.")
                     ])])
                 ],style={'font-size':15,'color':'black','font-family':'Arial'}),
             ]),
             html.Hr(style={'backgroundColor':'black','height':1}),
             html.Div(children=[
                 html.H3("Purpose & Goal",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
-                html.P("The primary purpose of this application is to predict the likelihood of hotel booking cancellations using machine learning techniques. By identifying bookings with a high probability of cancellation, the application helps support organizations with better decision-making, minimize potential revenue loss, and improve booking management. It also provides an interactive dashboard for analyzing booking trends and customer behavior through visualizations."),
-                html.P(["The goal of this application is to: -",html.Ol(children=[
-                    html.Li("Develop an accurate, user-friendly, and interactive prediction system."),
-                    html.Li("Assist hotels and travel businesses in making data-driven decisions."),
-                    html.Li("To enhance operational efficiency, optimize resource planning, and contribute to effective revenue protection strategies.")
+                html.P("The main purpose of this application is to provide a practical tool for analyzing and predicting hotel booking cancellations. It combines machine learning with data visualizations to present cancellation prediction and meaningful insights from booking data."),
+                html.P(["By identifying bookings with high probability cancellation, it helps support organizations with achieving goals of: -",html.Ol(children=[
+                    html.Li("Better decision making by alerting managers and staff on high-risk customers."),
+                    html.Li("Minimize potential revenue loss by implementing effective revenue protection strategies."),
+                    html.Li("Improve booking management by optimizing resource planning and enhancing operational efficiency.")
                 ])])
             ],style={'font-size':15,'color':'black','font-family':'Arial'}),
             html.Hr(style={'backgroundColor':'black','height':1}),
             html.Div(children=[
                 html.H3("Model Information",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
                 html.Div(children=[
-                    html.P("This application uses the Histogram-Based Gradient Boosting Classifier to predict whether a hotel booking is likely to be cancelled. The model was trained using preprocessed historical booking data after handling missing values, encoding categorical features, and selecting relevant variables."),
-                    html.P("This model was chosen because it: -"),
+                    html.P("This application uses the Histogram-Based Gradient Boosting Classifier for prediction. The model was trained using preprocessed historical booking data after handling missing values, encoding categorical features, and selecting relevant variables. Extended details about the model are given below: -"),
+                    html.P([html.Strong("Histogram-based Gradient Boosting Classifier: ",style={'font-weight':900}),"It is a variant of Gradient Boosting Classifier, an ensemble model, that predicts continuous or discrete values using Gradient Boosting algorithm by discretizing continuous input features into bins. The algorithm uses the Boosting technique in which it trains multiple decision tree models on a specific dataset, here, Hotel Booking Demand Dataset, where each model rectifies prediction mistakes of the previous one."]),
+                    html.Div([
+                        html.Div([
+                            html.Img(
+                                src='/assets/model1.png',
+                                style={'width':'100%','height':'auto','borderRadius':'8px'}
+                            ),
+                            html.P(
+                                "Mechanism of Model: Discretizing Continuous Data into Bins", 
+                                style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'}
+                            )
+                        ],style={'width':'48%'}),
+                        html.Div([
+                            html.Img(
+                                src='/assets/model2.png',
+                                style={'width':'100%','height':'auto','borderRadius':'8px'}
+                            ),
+                            html.P(
+                                "Mechanism of Boosting Technique", 
+                                style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'}
+                            )
+                        ],style={'width':'48%'})
+                    ],style={'display':'flex','justifyContent':'space-between','alignItems':'flex-start','margin':'20px 0'}),
+                    html.P("This model was chosen because of the following reasons: -"),
                     html.Div(children=[
                         html.Ul(children=[
-                            html.Li("Provides high prediction F1 Score on structured tabular data."),
-                            html.Li("Trains faster by grouping continuous values into histograms."),
+                            html.Li("As shown in the figure on the right hand side, this model has the highest F1-Score (79.85%), the best metric to evaluate the model's performance, among all the other models (Decision Tree, Logistic Regression, XG Boost Classifier)."),
+                            html.Li("Trains faster and improves efficiency by grouping continuous input features into bins."),
                             html.Li("Handles large datasets efficiently with lower memory usage."),
                             html.Li("Captures complex non-linear relationships between booking features."),
-                            html.Li("Offers good generalization, reducing the risk of overfitting.")
+                            html.Li("Offers good generalization on an unseen data, thereby, reducing the risk of overfitting.")
                         ],style={'width':'35%','minWidth':'300px','padding':'15px','marginRight':'20px'}),
                         html.Div(children=[dcc.Graph(figure=comp_fig,config={'responsive':True},style={'width':'100%','height':'300px'})],
                         style={'width':'60%'})
