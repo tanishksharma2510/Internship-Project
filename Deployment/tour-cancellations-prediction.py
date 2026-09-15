@@ -25,9 +25,24 @@ app.layout=html.Div(children=[
     html.H1("Tour Cancellations Prediction App",style={'textAlign':'center','color':'black','font-size':40,
     'font-family':'Times New Roman'}),
     dcc.Tabs(id='tabs-input',value='tab-1',children=[
-        dcc.Tab(label='About the App',value='tab-1'),
-        dcc.Tab(label='Prediction',value='tab-2'),
-        dcc.Tab(label='Dashboard',value='tab-3'),
+        dcc.Tab(label=html.Span(children=[
+            html.Img(src='/assets/about.png',style={'height':'35px','marginRight':'8px','verticalAlign':'middle'}),
+            'About the App'
+        ]),value='tab-1',
+        style={'display':'flex','alignItems':'center','justifyContent':'center'},
+        selected_style={'borderTop':'2px solid cadetblue','color':'cadetblue'}),
+        dcc.Tab(label=html.Span(children=[
+            html.Img(src='/assets/prediction.png',style={'height':'35px','marginRight':'8px','verticalAlign':'middle'}),
+            'Prediction'
+        ]),value='tab-2',
+        style={'display':'flex','alignItems':'center','justifyContent':'center'},
+        selected_style={'borderTop':'2px solid cadetblue','color':'cadetblue'}),
+        dcc.Tab(label=html.Span(children=[
+            html.Img(src='/assets/dashboard.png',style={'height':'35px','marginRight':'8px','verticalAlign':'middle'}),
+            'Dashboard'
+        ]),value='tab-3',
+        style={'display':'flex','alignItems':'center','justifyContent':'center'},
+        selected_style={'borderTop':'2px solid cadetblue','color':'cadetblue'}),
     ]),
     dcc.Loading(
         id="loading-app",
@@ -157,18 +172,20 @@ def get_tab(tab_val):
                         id='checklist-1',
                         options=[{'label':i,'value':i} for i in sorted(hotel_data['Customer Category'].unique())],
                         inline=False,
-                        labelStyle={'font-size':15,'color':'black','font-family':'Arial','marginBottom':'8px'}
+                        labelStyle={'font-size':15,'color':'black','font-family':'Arial','marginBottom':'8px'},
+                        inputStyle={'accent-color':'royalblue'}
                     ),
                     html.Br(),
                     html.Label("Deposit Filter:", style={'fontWeight':'bold','fontSize':15,'font-family':'Arial'}),
                     dcc.Checklist(
                         id='checklist-2',
                         options=[{'label':i,'value':i} for i in sorted(hotel_data['Deposit Category'].unique())],
-                        inline=True,
-                        labelStyle={'font-size':15,'color':'black','font-family':'Arial','marginBottom':'8px'}
+                        inline=False,
+                        labelStyle={'font-size':15,'color':'black','font-family':'Arial','marginBottom':'8px'},
+                        inputStyle={'accent-color':'royalblue'}
                     )
-                ],style={'width':'20%','minWidth':'200px','padding':'15px','backgroundColor':'beige','borderRadius':'5px',
-                'marginRight':'20px'}),
+                ],style={'width':'20%','minWidth':'200px','padding':'15px','backgroundColor':'whitesmoke','borderRadius':'5px',
+                'marginRight':'20px','border':'2px solid steelblue','boxShadow':'0 4px 6px -1px rgba(0, 0, 0, 0.05)'}),
                 html.Div(children=[
                     html.Div(children=[
                         dcc.Loading(
