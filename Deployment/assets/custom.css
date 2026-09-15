@@ -1,0 +1,26 @@
+label.dash-options-list-option.dash-dropdown-option {
+    color: black;
+}
+
+label.dash-options-list-option.dash-dropdown-option:hover,
+label.dash-options-list-option.dash-dropdown-option:focus,
+label.dash-options-list-option.dash-dropdown-option.dash-dropdown-option--focused {
+    background-color: white !important;
+    color: skyblue !important;
+}
+
+label.dash-options-list-option.dash-dropdown-option[aria-selected="true"] {
+    color: skyblue !important;
+    background-color: white !important;
+}
+
+.dash-dropdown:focus,
+.dash-dropdown:focus-within,
+.dash-input-container:focus-within {
+    outline: 1px solid skyblue !important;
+    border-color: skyblue !important;
+}
+
+:root {
+    --Dash-Fill-Interactive-Strong: skyblue !important;
+}
