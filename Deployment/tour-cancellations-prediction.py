@@ -255,7 +255,11 @@ def get_tab(tab_val):
             html.Div(children=[
                 html.H3("Overview",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
                 html.Div(children=[
-                    html.P("Tour Cancellations Prediction App is a machine learning-based web application designed to predict whether a hotel booking is likely to be cancelled or not. This application is developed primarily for hospitality industry, mainly hotels, resorts, and individual travel agents or travel agencies. The system gives prediction and confidence level (probability in %) of the result based on user-provided booking information. It also provides interactive dashboard to scrutinize booking trends and customer behaviour through visualizations."),
+                    html.P("Tour Cancellations Prediction App is a machine learning-based web application designed to predict whether "
+                    "a hotel booking is likely to be cancelled or not. This application is developed primarily for hospitality industry, "
+                    "mainly hotels, resorts, and individual travel agents or travel agencies. The system gives prediction and confidence "
+                    "level (probability in %) of the result based on user-provided booking information. It also provides interactive "
+                    "dashboard to scrutinize booking trends and customer behaviour through visualizations."),
                     html.P(["Some key features of this application are as follows: -",html.Ul(children=[
                         html.Li("Predicts booking cancellation for identifying high-risk bookings."),
                         html.Li("Provides interactive dashboard for gaining powerful insights."),
@@ -266,8 +270,11 @@ def get_tab(tab_val):
             html.Hr(style={'backgroundColor':'black','height':1}),
             html.Div(children=[
                 html.H3("Purpose & Goal",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
-                html.P("The main purpose of this application is to provide a practical tool for analyzing and predicting hotel booking cancellations. It combines machine learning with data visualizations to present cancellation prediction and meaningful insights from booking data."),
-                html.P(["By identifying bookings with high probability cancellation, it helps support organizations with achieving goals of: -",html.Ol(children=[
+                html.P("The main purpose of this application is to provide a practical tool for analyzing and predicting hotel booking "
+                "cancellations. It combines machine learning with data visualizations to present cancellation prediction and meaningful "
+                "insights from booking data."),
+                html.P(["By identifying bookings with high probability cancellation, it helps support organizations with achieving goals "
+                "of: -",html.Ol(children=[
                     html.Li("Better decision making by alerting managers and staff on high-risk customers."),
                     html.Li("Minimize potential revenue loss by implementing effective revenue protection strategies."),
                     html.Li("Improve booking management by optimizing resource planning and enhancing operational efficiency.")
@@ -277,34 +284,32 @@ def get_tab(tab_val):
             html.Div(children=[
                 html.H3("Model Information",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
                 html.Div(children=[
-                    html.P("This application uses the Histogram-Based Gradient Boosting Classifier for prediction. The model was trained using preprocessed historical booking data after handling missing values, encoding categorical features, and selecting relevant variables. Extended details about the model are given below: -"),
-                    html.P([html.Strong("Histogram-based Gradient Boosting Classifier: ",style={'font-weight':900}),"It is a variant of Gradient Boosting Classifier, an ensemble model, that predicts continuous or discrete values using Gradient Boosting algorithm by discretizing continuous input features into bins. The algorithm uses the Boosting technique in which it trains multiple decision tree models on a specific dataset, here, Hotel Booking Demand Dataset, where each model rectifies prediction mistakes of the previous one."]),
+                    html.P("This application uses the Histogram-Based Gradient Boosting Classifier for prediction. The model was trained "
+                    "using preprocessed historical booking data after handling missing values, encoding categorical features, and "
+                    "selecting relevant variables. Extended details about the model are given below: -"),
+                    html.P([html.Strong("Histogram-based Gradient Boosting Classifier: ",style={'font-weight':900}),"It is a variant of "
+                    "Gradient Boosting Classifier, an ensemble model, that predicts continuous or discrete values using Gradient Boosting "
+                    "algorithm by discretizing continuous input features into bins. The algorithm uses the Boosting technique in which it "
+                    "trains multiple decision tree models on a specific dataset, here, Hotel Booking Demand Dataset, where each model "
+                    "rectifies prediction mistakes of the previous one."]),
                     html.Div([
                         html.Div([
-                            html.Img(
-                                src='/assets/model1.png',
-                                style={'width':'100%','height':'auto','borderRadius':'8px'}
-                            ),
-                            html.P(
-                                "Mechanism of Model: Discretizing Continuous Data into Bins", 
-                                style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'}
-                            )
+                            html.Img(src='/assets/model1.png',style={'width':'100%','height':'auto','borderRadius':'8px'}),
+                            html.Em("Mechanism of Model: Discretizing Continuous Data into Bins",
+                            style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'})
                         ],style={'width':'48%'}),
                         html.Div([
-                            html.Img(
-                                src='/assets/model2.png',
-                                style={'width':'100%','height':'auto','borderRadius':'8px'}
-                            ),
-                            html.P(
-                                "Mechanism of Boosting Technique", 
-                                style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'}
-                            )
+                            html.Img(src='/assets/model2.png',style={'width':'100%','height':'auto','borderRadius':'8px'}),
+                            html.Em("Mechanism of Boosting Technique",
+                            style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'})
                         ],style={'width':'48%'})
                     ],style={'display':'flex','justifyContent':'space-between','alignItems':'flex-start','margin':'20px 0'}),
                     html.P("This model was chosen because of the following reasons: -"),
                     html.Div(children=[
                         html.Ul(children=[
-                            html.Li("As shown in the figure on the right hand side, this model has the highest F1-Score (79.85%), the best metric to evaluate the model's performance, among all the other models (Decision Tree, Logistic Regression, XG Boost Classifier)."),
+                            html.Li("As shown in the figure on the right hand side, this model has the highest F1-Score (79.85%), "
+                            "the best metric to evaluate the model's performance, among all the other models (Decision Tree, "
+                            "Logistic Regression, XG Boost Classifier)."),
                             html.Li("Trains faster and improves efficiency by grouping continuous input features into bins."),
                             html.Li("Handles large datasets efficiently with lower memory usage."),
                             html.Li("Captures complex non-linear relationships between booking features."),
@@ -319,7 +324,9 @@ def get_tab(tab_val):
             html.Div(children=[
                 html.H3("Dataset and ETL Information",style={'font-size':20,'color':'black','font-family':'Times New Roman'}),
                 html.Div(children=[
-                    html.P("The application is built using the Hotel Booking Demand Dataset, which contains historical booking information collected from hotels. The dataset provides various booking-related attributes that are used to train the machine learning model and analyze customer booking patterns."),
+                    html.P("The application is built using the Hotel Booking Demand Dataset, which contains historical booking information "
+                    "collected from hotels. The dataset provides various booking-related attributes that are used to train the machine "
+                    "learning model and analyze customer booking patterns."),
                     html.Ol(children=[
                         html.Li([html.Strong("Dataset: ",style={'font-weight':900}),"Hotel Booking Demand Dataset"]),
                         html.Li([html.Strong("Source: ",style={'font-weight':900}),"Kaggle"]),
@@ -332,7 +339,9 @@ def get_tab(tab_val):
                 ]),
                 html.Br(),
                 html.Div(children=[
-                    html.P("The application follows the ETL (Extract, Transform, Load) process to prepare the dataset for analysis and prediction. This process ensures that the data is clean, consistent, and suitable for training the machine learning model."),
+                    html.P("The application follows the ETL (Extract, Transform, Load) process to prepare the dataset for analysis and "
+                    "prediction. This process ensures that the data is clean, consistent, and suitable for training the machine learning "
+                    "model."),
                     html.Ol(children=[
                         html.Li([html.Strong("Extract: ",style={'font-weight':900}),"Loaded the dataset from a CSV file."]),
                         html.Li([html.Strong("Transform: ",style={'font-weight':900}),html.Ul(children=[
@@ -342,7 +351,8 @@ def get_tab(tab_val):
                             html.Li("Selected relevant features."),
                             html.Li("Split the data into training and testing sets."),
                         ])]),
-                        html.Li([html.Strong("Load: ",style={'font-weight':900}),"Loaded the processed data into the machine learning pipeline for model training and prediction."])
+                        html.Li([html.Strong("Load: ",style={'font-weight':900}),"Loaded the processed data into the machine learning "
+                        "pipeline for model training and prediction."])
                     ])
                 ])
             ],style={'font-size':15,'color':'black','font-family':'Arial'}),
@@ -363,15 +373,18 @@ def get_tab(tab_val):
                                 ]),
                                 html.Tr([
                                     html.Td('Precision',style={'border':'1px solid black','padding':'8px'}),
-                                    html.Td(f"{precision_score(Y_test,Y_pred,average='macro')*100:.2f}%",style={'border':'1px solid black','padding':'8px'})
+                                    html.Td(f"{precision_score(Y_test,Y_pred,average='macro')*100:.2f}%",
+                                    style={'border':'1px solid black','padding':'8px'})
                                 ]),
                                 html.Tr([
                                     html.Td('Recall',style={'border':'1px solid black','padding':'8px'}),
-                                    html.Td(f"{recall_score(Y_test,Y_pred,average='macro')*100:.2f}%",style={'border':'1px solid black','padding':'8px'})
+                                    html.Td(f"{recall_score(Y_test,Y_pred,average='macro')*100:.2f}%",
+                                    style={'border':'1px solid black','padding':'8px'})
                                 ]),
                                 html.Tr([
                                     html.Td('F1 Score',style={'border':'1px solid black','padding':'8px'}),
-                                    html.Td(f"{f1_score(Y_test,Y_pred,average='macro')*100:.2f}%",style={'border':'1px solid black','padding':'8px'})
+                                    html.Td(f"{f1_score(Y_test,Y_pred,average='macro')*100:.2f}%",
+                                    style={'border':'1px solid black','padding':'8px'})
                                 ])
                             ],style={'textAlign':'center'})
                         ],style={'width':'100%','borderBottom':'1px solid #ddd','borderCollapse':'collapse'})
@@ -379,11 +392,18 @@ def get_tab(tab_val):
                     html.Div(children=[dcc.Graph(figure=conmat,config={'responsive':True},style={'width':'100%','height':'300px'})],
                         style={'width':'60%'})
                 ],style={'display':'flex','flexDirection':'row','alignItems':'center','justifyContent':'space-between','marginTop':'40px'}),
-                html.P(["The performance of the model is evaluated using standard classification metrics, i.e., ",html.Em("Accuracy"),", ",html.Em("Precision"),", ",html.Em("Recall"),", and ",html.Em("F1 Score"),", and the ",html.Em("Confusion Matrix"),r". The model achieves an Accuracy of 82.27%, correctly predicting most booking outcomes. A Precision of 81.97% indicates that the majority of bookings predicted as cancelled were actually cancelled, while a Recall of 79.29% reflects the model's ability to identify a large proportion of actual cancellations. The F1-Score of 80.24% demonstrates a balanced performance between precision and recall."]),
+                html.P(["The performance of the model is evaluated using standard classification metrics, i.e., ",html.Em("Accuracy"),", ",
+                html.Em("Precision"),", ",html.Em("Recall"),", and ",html.Em("F1 Score"),", and the ",html.Em("Confusion Matrix"),
+                r". The model achieves an Accuracy of 82.27%, correctly predicting most booking outcomes. A Precision of 81.97% indicates that the majority of bookings predicted as cancelled were actually cancelled, while a Recall of 79.29% reflects the model's ability to identify a large proportion of actual cancellations. The F1-Score of 80.24% demonstrates a balanced performance between precision and recall."]),
                 html.Br(),
-                html.P("The confusion matrix visually summarizes the model's predictions by showing the number of correctly and incorrectly classified bookings. Around 30,000 bookings were correctly predicted as cancelled and not cancelled showing a strong sign of how our model generalizes to an unseen dataset."),
+                html.P("The confusion matrix visually summarizes the model's predictions by showing the number of correctly and "
+                "incorrectly classified bookings. Around 30,000 bookings were correctly predicted as cancelled and not cancelled showing "
+                "a strong sign of how our model generalizes to an unseen dataset."),
                 html.Br(),
-                html.P("Overall, these results suggest that the model demonstrates strong predictive performance and serves as an effective decision-support tool for identifying potential booking cancellations. By enabling early risk detection, it helps the hospitality industry to implement proactive strategies to minimize revenue loss and optimize booking management."),
+                html.P("Overall, these results suggest that the model demonstrates strong predictive performance and serves as an "
+                "effective decision-support tool for identifying potential booking cancellations. By enabling early risk detection, it "
+                "helps the hospitality industry to implement proactive strategies to minimize revenue loss and optimize booking "
+                "management."),
             ],style={'font-size':15,'color':'black','font-family':'Arial'}),
             html.Hr(style={'backgroundColor':'black','height':1}),
             html.Div(children=[
@@ -400,14 +420,24 @@ def get_tab(tab_val):
             html.Hr(style={'backgroundColor':'black','height':3}),
             html.Div(children=[
                 html.H2("About the Developer",style={'font-size':30,'color':'black','font-family':'Times New Roman'}),
-                html.P(["I am Tanishk Sharma, a B.Tech student from Amity University, Noida, specializing in ",html.Strong("Data Science",style={'font-weight':900})," with a strong interest in Machine Learning, Data Analytics, and Business Intelligence. My journey in data science began by completing the ",html.Strong("IBM Data Science Professional Certificate",style={'font-weight':900})," on ",html.Strong("Coursera",style={'font-weight':900}),", where I built a solid foundation in Python, data analysis, visualization, and machine learning."]),
-                html.P(["To gain practical industry experience, I completed a ",html.Strong("Data Scientist Internship")," at ",html.Strong("TUMLARE SOFTWARE SERVICES (P) LTD.",style={'font-weight':900})," where I worked on data science tasks involving data preprocessing, exploratory data analysis, machine learning, and predictive analytics. This internship strengthened my technical skills and provided valuable exposure to real-world data-driven projects."]),
-                html.P(["The knowledge and experience gained through my coursework and internship inspired me to develop this application, ",html.Strong("Predicting Tour Cancellations to Protect Revenue",style={'font-weight':900}),", which combines machine learning and interactive data visualization to support intelligent decision-making in the tourism and hospitality industry."])
+                html.P(["I am Tanishk Sharma, a B.Tech student from Amity University, Noida, specializing in ",
+                html.Strong("Data Science",style={'font-weight':900})," with a strong interest in Machine Learning, Data Analytics, "
+                "and Business Intelligence. My journey in data science began by completing the ",html.Strong("IBM Data Science "
+                "Professional Certificate",style={'font-weight':900})," on ",html.Strong("Coursera",style={'font-weight':900}),", "
+                "where I built a solid foundation in Python, data analysis, visualization, and machine learning."]),
+                html.P(["To gain practical industry experience, I completed a ",html.Strong("Data Scientist Internship")," at ",
+                html.Strong("TUMLARE SOFTWARE SERVICES (P) LTD.",style={'font-weight':900})," where I worked on data science tasks "
+                "involving data preprocessing, exploratory data analysis, machine learning, and predictive analytics. This internship "
+                "strengthened my technical skills and provided valuable exposure to real-world data-driven projects."]),
+                html.P(["The knowledge and experience gained through my coursework and internship inspired me to develop this application, "
+                ,html.Strong("Predicting Tour Cancellations to Protect Revenue",style={'font-weight':900}),", which combines machine "
+                "learning and interactive data visualization to support intelligent decision-making in the tourism and hospitality industry."])
             ],style={'font-size':20,'color':'black','font-family':'Arial'}),
             html.Br(),
             html.Br(),
             html.Br(),
-            html.Footer("© 2026 Tanishk Sharma. All rights reserved.",style={'textAlign':'center','fontSize':10,'color':'black','fontFamily':'Arial'})
+            html.Footer("© 2026 Tanishk Sharma. All rights reserved.",
+            style={'textAlign':'center','fontSize':10,'color':'black','fontFamily':'Arial'})
         ])
 
 # 2nd Part: Callback Function
