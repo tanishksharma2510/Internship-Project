@@ -296,12 +296,12 @@ def get_tab(tab_val):
                         html.Div([
                             html.Img(src='/assets/model1.png',style={'width':'100%','height':'auto','borderRadius':'8px'}),
                             html.Em("Mechanism of Model: Discretizing Continuous Data into Bins",
-                            style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'})
+                            style={'textAlign':'center','display':'block','fontSize':'12px','color':'black','marginTop':'5px'})
                         ],style={'width':'48%'}),
                         html.Div([
                             html.Img(src='/assets/model2.png',style={'width':'100%','height':'auto','borderRadius':'8px'}),
                             html.Em("Mechanism of Boosting Technique",
-                            style={'textAlign':'center','fontSize':'12px','color':'black','marginTop':'5px'})
+                            style={'textAlign':'center','display':'block','fontSize':'12px','color':'black','marginTop':'5px'})
                         ],style={'width':'48%'})
                     ],style={'display':'flex','justifyContent':'space-between','alignItems':'flex-start','margin':'20px 0'}),
                     html.P("This model was chosen because of the following reasons: -"),
