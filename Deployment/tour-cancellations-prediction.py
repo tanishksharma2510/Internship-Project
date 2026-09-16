@@ -62,8 +62,8 @@ def get_tab(tab_val):
     if (tab_val=='tab-2'):
         return html.Div(children=[
             html.H2("Prediction of Tour Cancellations",style={'textAlign':'center','color':'black','font-size':30,
-            'font-family':'Times New Roman'}),
-            html.Hr(style={'background-color':'black','height':3}),
+            'font-family':'Times New Roman','background-color':'lightblue','margin':'0','padding':'15px 0'}),
+            html.Hr(style={'background-color':'black','height':3,'margin':'0'}),
             html.Br(),
             html.Div(children=[
                 html.P(children=["Please enter the following details of ",html.Strong("YOUR",style={'font-weight':900}),
@@ -142,8 +142,8 @@ def get_tab(tab_val):
     elif (tab_val=='tab-3'):
         return html.Div(children=[
             html.H2("Hotel Bookings Dashboard",style={'textAlign':'center','color':'black','font-size':30,
-            'font-family':'Times New Roman'}),
-            html.Hr(style={'background-color':'black','height':3}),
+            'font-family':'Times New Roman','background-color':'lightblue','margin':'0','padding':'15px 0'}),
+            html.Hr(style={'background-color':'black','height':3,'margin':'0'}),
             html.Br(),
             html.Div(children=[
                 html.Label("Select a City:"),
